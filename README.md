@@ -1,2 +1,2 @@
-# Bot_previsao_tempo_ararangua
+# Bot que posta diariamente a previsão do tempo no twitter
 [Bot atuando](https://twitter.com/AruPrevisao)
