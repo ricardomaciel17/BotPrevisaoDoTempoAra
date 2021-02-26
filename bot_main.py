@@ -32,13 +32,15 @@ def funcao_bot():
     MaxTemp = ValuesNeeded['max']
     MinTemp = ValuesNeeded['min']
     Description = ValuesNeeded['description']
+    Description = ("Ensolarado com muitas nuvens")
 
     if Description == ('Ensolarado com muitas nuvens'):
         Description = ('Clima ensolarado com muitas nuvens')
     Tweet = ('A previsão do tempo para amanhã em Araranguá, '+str(Day)+', é de um dia com '+Description+
             ', com minima de '+str(MinTemp)+'° e maxima de '+str(MaxTemp)+'°')
     try:
-        api.update_status(Tweet)
+        print(tweet)
+        #api.update_status(Tweet)
         sleeper.sleeping()
         import timer
     except tweepy.TweepError as Error:
