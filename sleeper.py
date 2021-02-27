@@ -1,4 +1,4 @@
 import time
 
 def sleeping():
-    time.sleep(1800)
+    time.sleep(900)

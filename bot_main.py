@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #Developed By Ricardo Maciel
-#version 1.1
+#version 1.2
 
 import tweepy, urllib.request, json, datetime, sleeper
 from dotenv import load_dotenv
@@ -13,7 +13,6 @@ def funcao_bot():
     access_token_secret = os.getenv("access_token_secret")
     forecast_io_apikey =  os.getenv("forecast_io_apikey")
 
-
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     api = tweepy.API(auth)
@@ -21,26 +20,27 @@ def funcao_bot():
     response = urllib.request.urlopen(url);
     data = json.loads(response.read())
     today = datetime.date.today()
-    NextDay = today + datetime.timedelta(days = 1) 
-    NextDay = NextDay.strftime("%d/%m")
+    nextDay = today + datetime.timedelta(days = 1)
+    dayTweet = nextDay.strftime("%d/%m/%y")
+    nextDay = nextDay.strftime("%d/%m")
+
     for values in data['forecast']:
         days = values['date']
-        if days == NextDay:
+        if days == nextDay:
             break
-    Day = values['date']
-    MaxTemp = values['max']
-    MinTemp = values['min']
-    Description = values['description']
 
-    if Description == ('Ensolarado com muitas nuvens'):
-        Description = ('Clima ensolarado com muitas nuvens')
-    Tweet = ('A previsão do tempo para amanhã em Araranguá, '+str(Day)+', é de um dia com '+Description+
-            ', com minima de '+str(MinTemp)+'° e maxima de '+str(MaxTemp)+'°')
+    maxTemp = values['max']
+    minTemp = values['min']
+    description = values['description']
+
+    if description == ('Ensolarado com muitas nuvens'):
+        description = ('Clima ensolarado com muitas nuvens')
+    tweet = ('A previsão do tempo para amanhã em Araranguá, '+str(dayTweet)+', é de um dia com '+description+
+            ', com minima de '+str(minTemp)+'° e maxima de '+str(maxTemp)+'°')
     try:
-        api.update_status(Tweet)
+        api.update_status(tweet)
         sleeper.sleeping()
         import timer
     except tweepy.TweepError as Error:
         api.update_status(Error)
         exit()
-
