@@ -2,7 +2,7 @@
 #Developed By Ricardo Maciel
 #version 1.2
 
-import tweepy, urllib.request, json, datetime, sleeper
+import tweepy, urllib.request, json, datetime, sleeper, spClock
 from dotenv import load_dotenv
 load_dotenv('key.env')
 def funcao_bot():
@@ -19,7 +19,7 @@ def funcao_bot():
     url = "https://api.hgbrasil.com/weather?woeid=456048&array_limit=2&fields=only_results,temp,city_name,forecast,max,min,date,description&key="+str(forecast_io_apikey)
     response = urllib.request.urlopen(url);
     data = json.loads(response.read())
-    today = datetime.date.today()
+    today = spClock.funcao_horario_sp()
     nextDay = today + datetime.timedelta(days = 1)
     dayTweet = nextDay.strftime("%d/%m/%y")
     nextDay = nextDay.strftime("%d/%m")
