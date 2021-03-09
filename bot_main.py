@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #Developed By Ricardo Maciel
-#version 1.2
+#version 1.2.1
 
 import tweepy, urllib.request, json, datetime, sleeper, spClock
 from dotenv import load_dotenv
@@ -33,8 +33,8 @@ def funcao_bot():
     minTemp = values['min']
     description = values['description']
 
-    if description == ('Ensolarado com muitas nuvens'):
-        description = ('Clima ensolarado com muitas nuvens')
+    if description == ('Ensolarado com muitas nuvens') or description == ('Parcialmente nublado'):
+        description = ('tempo '+description)
     tweet = ('A previsão do tempo para amanhã em Araranguá, '+str(dayTweet)+', é de um dia com '+description+
             ', com minima de '+str(minTemp)+'° e maxima de '+str(maxTemp)+'°')
     try:
